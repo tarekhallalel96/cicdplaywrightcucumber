@@ -1,19 +1,27 @@
-module.exports = {
-    default: {
-      require: [
-        "step-definitions/**/*.ts",   // Path to step definitions
-        "hooks/**/*.ts"               // Path to hooks
-      ],
-      format: [
-        "json:reports/cucumber-report.json", // JSON report for analysis
-        "html:reports/cucumber-report.html"  // HTML report for human-readable output
-      ],
-      tags: "@valid or @invalid",  // Run specific tests with tags
-      worldParameters: {           // Custom parameters for tests
-        baseUrl: "https://opensource-demo.orangehrmlive.com"
-      },
-      requireModule: ["ts-node/register"], // Enable TypeScript
-      timeout: 10000, // Set test timeout (10s)
-    },
+const getWorldParams = () => {
+  const params = {
+    foo: 'bar'
   };
-  
+
+  return params;
+};
+
+const config = {
+  import: ['src/**/*.ts'],
+  format: [
+    // 'message:e2e/reports/cucumber-report.ndjson',
+    'json:reports/cucumber-report.json',
+    'html:reports/report.html',
+    'summary',
+    'progress-bar'
+  ],
+  formatOptions: { snippetInterface: 'async-await' },
+  worldParameters: getWorldParams()
+};
+
+if (process.env.USE_ALLURE) {
+  config.format.push('./src/support/reporters/allure-reporter.ts');
+} else {
+  config.format.push('@cucumber/pretty-formatter');
+}
+export default config;

@@ -1,1 +1,0 @@
-npx playwright show-trace ./traces/trace-Successful\ login.zip
