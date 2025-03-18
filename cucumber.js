@@ -13,7 +13,8 @@ const config = {
     'json:reports/cucumber-report.json',
     'html:reports/report.html',
     'summary',
-    'progress-bar'
+    'progress-bar',
+    "allure-cucumberjs/reporter"
   ],
   formatOptions: { snippetInterface: 'async-await' },
   worldParameters: getWorldParams()
@@ -24,4 +25,4 @@ if (process.env.USE_ALLURE) {
 } else {
   config.format.push('@cucumber/pretty-formatter');
 }
-export default config;
+module.exports = config;
