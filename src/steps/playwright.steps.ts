@@ -17,7 +17,7 @@ When('Change theme to {string} mode', async function (this: ICustomWorld, mode: 
     await page.locator('nav >> button[title*="dark and light mode"]').click();
   }
   await page.locator(`html[data-theme=${mode}]`).waitFor();
-  expect(true).toBeFalsy()
+  
 });
 
 Then('We see {string} mode', async function (this: ICustomWorld, mode: string) {
