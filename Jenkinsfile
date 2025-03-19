@@ -21,7 +21,7 @@ pipeline {
                     // sh "npx cucumber-js --format json:reports/cucumber-report.json --tags '${params.CHOICE_TAG}'"
                     // sh "npm run only '${params.CHOICE_TAG}'"
                     sh 'npx cucumber-js --format json:reports/cucumber-report.json'
-                    stash name: 'allure-results', includes: 'allure-results/*'
+                    stash name: 'allure-results', includes: './allure-results/**'
 
                 }
             }
@@ -37,7 +37,7 @@ pipeline {
                     jdk: '',
                     properties: [],
                     reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'allure-results']]
+                    results: [[path: './allure-results/']]
                 ])
             }
         }
